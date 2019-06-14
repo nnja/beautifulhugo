@@ -15,12 +15,12 @@
 
 {{ if or $bigimg $title }}
   {{ if $bigimg }}
-    <div id="header-big-imgs" data-num-img={{len $bigimg}} 
+    <div id="header-big-imgs" data-num-img={{len $bigimg}}
       {{range $i, $img := $bigimg}}
-         {{ if (fileExists $img.src)}} 
-          data-img-src-{{add $i 1}}="{{$img.src | absURL }}" 
+         {{ if (fileExists $img.src)}}
+          data-img-src-{{add $i 1}}="{{$img.src | absURL }}"
          {{else}}
-          data-img-src-{{add $i 1}}="{{$img.src}}" 
+          data-img-src-{{add $i 1}}="{{$img.src}}"
          {{end}}
          {{ if $img.desc}}data-img-desc-{{add $i 1}}="{{$img.desc}}"{{end}}
       {{end}}></div>
@@ -61,14 +61,28 @@
               {{ if eq .Type "list" }}
                 <h1>{{ if .Data.Singular }}#{{ end }}{{ .Title }}</h1>
               {{ else }}
-                <h1>{{ with $title }}{{.}}{{ else }}<br/>{{ end }}</h1>
+                <h1>{{ with $title }}{{.}}
+
+                  {{ else }}
+
+                  <br/>{{ end }}</h1>
+                  </span>
               {{ end }}
               {{ if ne .Type "post" }}
                 <hr class="small">
               {{ end }}
               {{ if $subtitle }}
                 {{ if eq .Type "page" }}
-                  <span class="{{ .Type }}-subheading">{{ $subtitle }}</span>
+                  <span class="{{ .Type }}-subheading">{{ $subtitle }}
+                      <!-- <span class="fa-stack fa-lg"> -->
+                      <!-- <i class="fas fa-circle fa-stack-2x"></i> -->
+                      {{ if .IsHome }}
+                      <!-- TODO NZ: use proper params here instead. -->
+                      <a href="https://twitter.com/nnja" target="_new"><i class="fab fa-twitter"></i></a>
+                      <a href="https://github.com/nnja" target="_new"><i class="fab fa-github"></i></a>
+                      <!-- </span></span> -->
+                      {{ end }}
+                      </span>
                 {{ else }}
                   <h2 class="{{ .Type }}-subheading">{{ $subtitle }}</h2>
                 {{ end }}
